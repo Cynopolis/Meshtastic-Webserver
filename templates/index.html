@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat</title>
+    <style>
+        #inputBox { width: 80%; }
+        #sendButton { width: 18%; }
+        #displayBox { width: 100%; height: 200px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <input type="text" id="inputBox" placeholder="Enter message">
+    <button id="sendButton">Send</button>
+    <textarea id="displayBox" readonly></textarea>
+
+    <script>
+        document.getElementById('sendButton').addEventListener('click', sendMessage);
+        document.getElementById('inputBox').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevents form submission if inside a form
+                sendMessage();
+            }
+        });
+    
+        function sendMessage() {
+            let message = document.getElementById('inputBox').value;
+            fetch('/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('displayBox').value = data.messages.join('\n');
+                document.getElementById('inputBox').value = '';
+                displayBox.scrollTop = displayBox.scrollHeight; // auto-scroll to bottom
+            });
+        }
+
+        function fetchMessages() {
+            fetch('/messages')
+            .then(response => response.json())
+            .then(data => {
+                let displayBox = document.getElementById('displayBox');
+                let newMessages = data.messages.join('\n');
+    
+                if (displayBox.value !== newMessages) { // Only update if there's a change
+                    displayBox.value = newMessages;
+                    displayBox.scrollTop = displayBox.scrollHeight; // Auto-scroll to bottom
+                }
+            });
+        }
+        // Poll every second for new messages
+        setInterval(fetchMessages, 1000);
+    </script>
+</body>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font-family: Arial, sans-serif;
+    }
+
+    #chatContainer {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 10px;
+    }
+
+    #inputRow {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    #inputBox {
+        flex-grow: 0;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    #sendButton {
+        padding: 10px 10px;
+        font-size: 16px;
+    }
+
+    #displayBox {
+        flex-grow: 1; /* Takes up the remaining space */
+        width: 100%;
+        resize: none; /* Prevents manual resizing */
+        padding: 10px;
+        font-size: 16px;
+        overflow-y: auto; /* Enables scrolling */
+    }
+</style>
+</html>
