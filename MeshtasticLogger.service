@@ -11,4 +11,4 @@ StandardOutput=append:/home/quinn/Projects/Meshtastic-Webserver/logs/meshtastic_
 StandardError=append:/home/quinn/Projects/Meshtastic-Webserver/logs/meshtastic_system_error.log
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

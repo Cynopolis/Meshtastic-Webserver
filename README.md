@@ -22,3 +22,6 @@ You can get the status of the service by running:
 And you can stop the service by running:
 
 `sudo systemctl stop MeshtasticLogger`
+
+To have the service start on boot run:
+`systemctl enable MeshtasticLogger`
