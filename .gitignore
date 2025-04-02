@@ -2,3 +2,4 @@ logs/
 meshtastic/
 .vscode/
 __pycache__/
+MeshtasticLogger.service
