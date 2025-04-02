@@ -29,4 +29,4 @@ To have the service start on boot run:
 # Automatic Deployment
 Make sure the bash script is executable by running: `chmod u+x install.sh`
 
-Run the script with: `sudo ./install.sh`
+Make certain you are actually in the Meshtastic-Webserver Directory or this will fail. Run the script with: `sudo ./install.sh`

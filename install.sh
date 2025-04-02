@@ -8,6 +8,7 @@ if test -f "meshtastic"; then
     echo "Virtual environment already exists. Skipping venv creation."
 else
     echo "Making virtual environment..."
+    python3 -m venv meshtastic
 fi
 
 echo "Installing venv requirements"
