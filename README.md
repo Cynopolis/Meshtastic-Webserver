@@ -1,15 +1,16 @@
 # Create a Virtual Environment
-Create the virtual environment and activate it
+Create the virtual environment and activate it:
+
 `python -m venv meshtastic && source meshtastic/bin/activate`
 
-Install the requirements
+Install the requirements: `pip install requirements.txt`
 
-pip install requirements.txt
+Try it out before deploying it as a service: `flask run --host=0.0.0.0 --port=5000`
 
 # Deploying Service Script Changes
 Type the following commands:
 
-`sudo cp /home/quinn/Projects/meshtastic/MeshtasticLogger.service /etc/systemd/system/ && sudo systemctl daemon-reload`
+`sudo cp ~/Projects/Meshtastic-Webserver/MeshtasticLogger.service /etc/systemd/system/ && sudo systemctl daemon-reload`
 
 To start the service run
 `sudo systemctl start MeshtasticLogger`
