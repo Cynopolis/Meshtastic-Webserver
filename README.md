@@ -25,3 +25,8 @@ And you can stop the service by running:
 
 To have the service start on boot run:
 `systemctl enable MeshtasticLogger`
+
+# Automatic Deployment
+Make sure the bash script is executable by running: `chmod u+x install.sh`
+
+Run the script with: `sudo ./install.sh`
